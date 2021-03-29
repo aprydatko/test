@@ -3,20 +3,13 @@ import { makeStyles } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import Button from '@material-ui/core/Button';
 import { Field, reduxForm } from 'redux-form'
-import Input from '../../components/UI-form/Input'
+import renderField from '../../components/UI-form/Input'
 
-const nameValid = (n, _, props) => {
-    return props.messageError && props.messageError.name ? props.messageError.name : null;
-}
-
-const passwordValid = (n, _, props) => {
-    return props.messageError && props.messageError.password? props.messageError.password : null;
-}
+const required = text => text ? null : 'Обязательное поле';
 
 const Auth = (props) => {
     const { handleSubmit, pristine, reset, submitting, messageError } = props
     const classes = useStyles();
-
     return (
         <div className={classes.root}>
             <form className={classes.form} onSubmit={handleSubmit}>
@@ -26,23 +19,23 @@ const Auth = (props) => {
                     <Field
                         className={classes.field}
                         name="username"
-                        component="input"
+                        component={renderField}
                         type="text"
                         placeholder="Название пользователя"
-                        validate={[nameValid]}
+                        validate={[required]}
                     />
                     </div>
                 </div>
                 <div>
-                    <label className={classes.label}>Email: </label>
+                    <label className={classes.label}>Пароль: </label>
                     <div>
                     <Field
                         className={classes.field}
                         name="password"
-                        component={Input}
+                        component={renderField}
                         type="password"
                         placeholder="Ведите свой Пароль"
-                        validate={[passwordValid]}
+                        validate={[required]}
                     />
                     </div>
                 </div>

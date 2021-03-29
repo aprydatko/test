@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios'
 import { makeStyles } from '@material-ui/core';
@@ -21,7 +20,7 @@ const EditTaskComponent = (props) => {
     useEffect(() => {
         const params = props.match.params.id.split('-');
         setLoading(true);
-        axios.get(`https://uxcandy.com/~shapoval/test-task-backend/v2?developer=Name&sort_field=name&sort_direction=asc&page=${params[1]}`)
+        axios.get(`?developer=Name&sort_field=name&sort_direction=asc&page=${params[1]}`)
             .then(res => {
                 if (res.status === 200) {
                     if (res.data.status === 'ok') {
@@ -43,8 +42,6 @@ const EditTaskComponent = (props) => {
 
 
     const handleSubmit = (data) => {
-        // console.log('--- data ---', data);
-
         const params = props.match.params.id.split('-');
         var form = new FormData();
         form.append("username", data.username);
@@ -56,18 +53,13 @@ const EditTaskComponent = (props) => {
 
         const options = {
             method: 'POST',
-            headers: { 
-                'Content-Type': 'multipart/form-data', 
-                // 'Authorization': `Bearer ${token}`,
-            },
             data: form,
-            url: `https://uxcandy.com/~shapoval/test-task-backend/v2/edit/${params[0]}?developer=Name&sort_field=name&sort_direction=asc&page=${params[1]}`,
+            url: `/edit/${params[0]}?developer=Name&sort_field=name&sort_direction=asc&page=${params[1]}`,
         };
 
         axios(options)
             .then(res => {
                 if(res.data.status === 'ok') {
-                    console.log('res -->>>', res);
                     props.history.push('/');
                 }
             })

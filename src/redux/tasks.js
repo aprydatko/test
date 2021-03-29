@@ -36,7 +36,6 @@ const Tasks = (state = initialState, action) => {
     }
 }
 
-
 export const getTasks = (tasks) => ({type: GET_TASKS, tasks});
 export const getTasksCount = (tasksCount) => ({type: GET_TASKS_COUNT, tasksCount});
 export const changeSortField = (sortField) => ({type: CHANGE_SORT_TYPE, sortField});

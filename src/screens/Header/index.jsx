@@ -1,19 +1,15 @@
 import React from 'react'
-import { logOut } from '../../redux/auth'
 import { useDispatch } from 'react-redux'
 import { makeStyles } from '@material-ui/core'
 import { withRouter, Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography'
-import Button from '@material-ui/core/Button'
 
-const Header = (props) => {
+const Header = () => {
     const classes = useStyles();
-    const dispatch = useDispatch();
     const isAdmin = localStorage.getItem('token');
 
     const handleClose = () => {
         localStorage.setItem('token', '');
-        dispatch(logOut());
     }
     return (
         <div className={classes.root}>

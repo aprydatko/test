@@ -1,10 +1,11 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
+import { Field, reduxForm } from 'redux-form';
 import Button from '@material-ui/core/Button';
-import { Field, reduxForm } from 'redux-form'
+import renderField from '../../components/UI-form/Input';
 
-const required = value => value ? undefined : 'Обязятельно'
+import useStyles from './styles';
+
+const required = value => value ? null : 'Обязятельно';
 
 const CreateTask = (props) => {
     const { handleSubmit, pristine, reset, submitting } = props
@@ -19,10 +20,10 @@ const CreateTask = (props) => {
                     <Field
                         className={classes.field}
                         name="username"
-                        component="input"
+                        component={renderField}
                         type="text"
                         placeholder="Название пользователя"
-                        valid={[required]}
+                        validate={[required]}
                     />
                     </div>
                 </div>
@@ -32,10 +33,10 @@ const CreateTask = (props) => {
                     <Field
                         className={classes.field}
                         name="email"
-                        component="input"
+                        component={renderField}
                         type="email"
                         placeholder="Ведите свой Email"
-                        valid={[required]}
+                        validate={[required]}
                     />
                     </div>
                 </div>
@@ -51,10 +52,9 @@ const CreateTask = (props) => {
                     <Field
                         className={classes.field}
                         name="status"
-                        component="input"
+                        component={renderField}
                         type="number"
                         placeholder="Статус задачи"
-                        valid={[required]}
                     />
                     </div>
                 </div>
@@ -70,34 +70,6 @@ const CreateTask = (props) => {
         </div>
     )
 }
-
-const useStyles = makeStyles({
-    root: {
-        marginTop: '26px',
-    },
-    typography: {
-        marginTop: 24,
-        marginBottom: 16,
-    },
-    btnWrap: {
-        marginTop: 24,
-        '& > button': {
-            marginRight: '16px'
-        }
-    },
-    form: {
-        background: '#f5f5f5',
-        padding: '8px 16px',
-    },
-    label: {
-        display: 'block',
-        fontSize: 14,
-        marginBottom: 6,
-    },
-    field: {
-        width: '100%',
-    }
-})
 
 export default reduxForm({
     form: 'CreateTask'  

@@ -27,7 +27,7 @@ const SelectComponent = () => {
         const sortField = event.target.value;
 
         setLoading(true);
-        axios.get(`https://uxcandy.com/~shapoval/test-task-backend/v2?developer=Name&sort_field=${sortField}&sort_direction=${sortDirection}&page=${page}`)
+        axios.get(`?developer=Name&sort_field=${sortField}&sort_direction=${sortDirection}&page=${page}`)
             .then(res => {
                 if (res.status === 200) {
                     if (res.data.status === 'ok') {
@@ -45,10 +45,6 @@ const SelectComponent = () => {
                 setLoading(false);
                 setError('Ошибка загрузки');
             });
-
-
-
-        // dispatch(changeSortType(event.target.value));
     };
 
     return (

@@ -1,16 +1,21 @@
 import React from 'react'
 
-const Input = ({ input, label, type, meta: { touched, error } }) => {
-    return (
-            <div>
-            <label>{label}</label>
-            <div>
-                <input {...input} type={type} placeholder={label} />
-                {touched && error && <span>{error}</span>}
-            </div>
-        </div>
-      )
-}
+const renderField = ({
+    input,
+    label,
+    type,
+    meta: { touched, error, warning }
+  }) => (
+    <div>
+      <label>{label}</label>
+      <div>
+        <input {...input} placeholder={label} type={type} />
+        {touched &&
+          ((error && <span style={{ color: 'red', display: 'block' }}>{error}</span>) ||
+            (warning && <span>{warning}</span>))}
+      </div>
+    </div>
+);
   
 
-export default Input
+export default renderField;
